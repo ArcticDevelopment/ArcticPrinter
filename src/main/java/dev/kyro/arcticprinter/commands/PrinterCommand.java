@@ -1,0 +1,43 @@
+package dev.kyro.arcticprinter.commands;
+
+import com.massivecraft.factions.FPlayers;
+import dev.kyro.arcticprinter.controllers.PrinterManager;
+import dev.kyro.arcticprinter.enums.PrinterEndReason;
+import dev.kyro.arcticprinter.objects.PrinterPlayer;
+import dev.kyro.arcticprinter.utilities.AOutput;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+
+public class PrinterCommand implements CommandExecutor {
+
+    @EventHandler
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+
+        if(!(sender instanceof Player)) {
+
+            System.out.println("no lol");
+            return false;
+        }
+
+        Player player = (Player) sender;
+
+        if(!FPlayers.getInstance().getByPlayer(player).isInOwnTerritory()) {
+
+            AOutput.error(player, "Not in your own territory");
+            return false;
+        }
+
+        if(PrinterManager.inPrinter(player)) {
+
+            PrinterManager.getPrinterPlayer(player).exitPrinter(PrinterEndReason.COMMAND_DISABLE);
+        } else {
+
+            new PrinterPlayer(player);
+        }
+
+        return false;
+    }
+}
