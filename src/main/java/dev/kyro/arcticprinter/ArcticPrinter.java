@@ -27,7 +27,7 @@ public class ArcticPrinter extends JavaPlugin {
 
         loadConfig();
 
-        ArcticAPI.setup(this, "", "");
+        ArcticAPI.configInit(this, "prefix", "error-prefix");
 
         if (!setupEconomy()) {
             log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
