@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
 }
 
 group = 'dev.kyro'
@@ -14,8 +15,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT'
-    implementation 'com.github.SaberLLC:Saber-Factions:2.4.0-RC'
-    implementation 'com.github.brcdev-minecraft:shopgui-api:2.1.1'
+    compileOnly 'org.spigotmc:spigot:1.8.8-R0.1-SNAPSHOT'
+    compileOnly 'com.github.SaberLLC:Saber-Factions:2.4.0-RC'
+    compileOnly 'com.github.brcdev-minecraft:shopgui-api:2.1.1'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
 }
