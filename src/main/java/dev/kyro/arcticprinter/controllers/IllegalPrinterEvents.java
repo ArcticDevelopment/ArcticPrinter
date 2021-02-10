@@ -1,6 +1,6 @@
 package dev.kyro.arcticprinter.controllers;
 
-import dev.kyro.arcticprinter.utilities.AOutput;
+import dev.kyro.arcticapi.misc.AOutput;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

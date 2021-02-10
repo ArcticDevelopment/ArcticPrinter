@@ -1,6 +1,7 @@
 package dev.kyro.arcticprinter;
 
 import com.massivecraft.factions.FactionsPlugin;
+import dev.kyro.arcticapi.ArcticAPI;
 import dev.kyro.arcticprinter.commands.PrinterCommand;
 import dev.kyro.arcticprinter.controllers.IllegalPrinterEvents;
 import dev.kyro.arcticprinter.controllers.PrinterEvents;
@@ -25,6 +26,8 @@ public class ArcticPrinter extends JavaPlugin {
         INSTANCE = this;
 
         loadConfig();
+
+        ArcticAPI.setup(this, "", "");
 
         if (!setupEconomy()) {
             log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));

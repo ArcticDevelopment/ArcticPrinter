@@ -1,10 +1,10 @@
 package dev.kyro.arcticprinter.commands;
 
 import com.massivecraft.factions.FPlayers;
+import dev.kyro.arcticapi.misc.AOutput;
 import dev.kyro.arcticprinter.controllers.PrinterManager;
 import dev.kyro.arcticprinter.enums.PrinterEndReason;
 import dev.kyro.arcticprinter.objects.PrinterPlayer;
-import dev.kyro.arcticprinter.utilities.AOutput;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

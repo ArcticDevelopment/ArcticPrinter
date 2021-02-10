@@ -1,9 +1,9 @@
 package dev.kyro.arcticprinter.controllers;
 
+import dev.kyro.arcticapi.misc.AOutput;
 import dev.kyro.arcticprinter.ArcticPrinter;
 import dev.kyro.arcticprinter.enums.PrinterEndReason;
 import dev.kyro.arcticprinter.objects.PrinterPlayer;
-import dev.kyro.arcticprinter.utilities.AOutput;
 import net.brcdev.shopgui.ShopGuiPlusApi;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

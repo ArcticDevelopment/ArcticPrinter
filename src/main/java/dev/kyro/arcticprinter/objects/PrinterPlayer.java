@@ -2,10 +2,10 @@ package dev.kyro.arcticprinter.objects;
 
 import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
+import dev.kyro.arcticapi.misc.AOutput;
 import dev.kyro.arcticprinter.ArcticPrinter;
 import dev.kyro.arcticprinter.controllers.PrinterManager;
 import dev.kyro.arcticprinter.enums.PrinterEndReason;
-import dev.kyro.arcticprinter.utilities.AOutput;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
