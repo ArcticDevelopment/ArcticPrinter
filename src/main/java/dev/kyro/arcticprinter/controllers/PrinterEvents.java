@@ -25,6 +25,12 @@ public class PrinterEvents implements Listener {
         double playerBalance = ArcticPrinter.VAULT.getBalance(player);
         double blockCost = ShopGuiPlusApi.getItemStackPriceBuy(player, event.getItemInHand());
 
+        if(blockCost < 0) {
+
+            AOutput.error(player, "Block is not in config");
+            return;
+        }
+
         if(playerBalance < blockCost) {
 
             AOutput.error(player, "Out of money");
