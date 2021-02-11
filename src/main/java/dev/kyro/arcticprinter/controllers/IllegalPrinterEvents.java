@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
 public class IllegalPrinterEvents implements Listener {
@@ -23,7 +24,18 @@ public class IllegalPrinterEvents implements Listener {
         if(ArcticPrinter.illegalItems.contains(event.getCurrentItem().getType())) {
 
             AOutput.error(player, "You are not allowed to do that in printer mode");
+            event.setCancelled(true);
         }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public static void onInteract(PlayerInteractEvent event) {
+
+        Player player = event.getPlayer();
+        if(!PrinterManager.inPrinter(player)) return;
+        event.setCancelled(true);
+
+        AOutput.send(player, "cancelled interact event (probably not a good idea lol)");
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
