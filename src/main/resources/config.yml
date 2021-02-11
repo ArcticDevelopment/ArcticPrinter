@@ -16,4 +16,19 @@ messages:
 # https://helpch.at/docs/1.8/org/bukkit/Material.html
 illegal-materials:
   - BUCKET
+  - WATER_BUCKET
+  - LAVA_BUCKET
+  - MILK_BUCKET
   - MINECART
+  - STORAGE_MINECART
+  - POWERED_MINECART
+  - EXPLOSIVE_MINECART
+  - COMMAND_MINECART
+  - HOPPER_MINECART
+  - ENDER_PEARL
+  - EYE_OF_ENDER
+  - ITEM_FRAME
+  - POTION
+  - MOB_SPAWNER
+  - MONSTER_EGG
+  - EXP_BOTTLE
