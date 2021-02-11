@@ -2,14 +2,17 @@ package dev.kyro.arcticprinter;
 
 import com.massivecraft.factions.FactionsPlugin;
 import dev.kyro.arcticapi.ArcticAPI;
+import dev.kyro.arcticapi.data.AConfig;
 import dev.kyro.arcticprinter.commands.PrinterCommand;
 import dev.kyro.arcticprinter.controllers.IllegalPrinterEvents;
 import dev.kyro.arcticprinter.controllers.PrinterEvents;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 public class ArcticPrinter extends JavaPlugin {
@@ -17,6 +20,8 @@ public class ArcticPrinter extends JavaPlugin {
     public static ArcticPrinter INSTANCE;
     public static Economy VAULT = null;
     public static FactionsPlugin FACTIONS;
+
+    public static List<Material> illegalItems;
 
     private static final Logger log = Logger.getLogger("Minecraft");
 
@@ -45,6 +50,13 @@ public class ArcticPrinter extends JavaPlugin {
 
         registerCommands();
         registerListeners();
+
+        for(String stringMaterial : AConfig.getStringList("illegal-materials")) {
+
+            Material material = Material.getMaterial(stringMaterial);
+
+            if(material != null) illegalItems.add(material);
+        }
     }
 
 

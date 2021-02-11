@@ -1,7 +1,7 @@
 package dev.kyro.arcticprinter.controllers;
 
 import dev.kyro.arcticapi.misc.AOutput;
-import org.bukkit.Material;
+import dev.kyro.arcticprinter.ArcticPrinter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,11 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 
-import java.util.ArrayList;
-
 public class IllegalPrinterEvents implements Listener {
-
-    public static ArrayList<Material> illegalItems = new ArrayList<>();
 
     @EventHandler(priority = EventPriority.LOWEST)
     public static void onInventoryClick(InventoryClickEvent event) {
@@ -24,7 +20,7 @@ public class IllegalPrinterEvents implements Listener {
 
         if(!PrinterManager.inPrinter(player)) return;
 
-        if(illegalItems.contains(event.getCurrentItem().getType())) {
+        if(ArcticPrinter.illegalItems.contains(event.getCurrentItem().getType())) {
 
             AOutput.error(player, "You are not allowed to do that in printer mode");
         }

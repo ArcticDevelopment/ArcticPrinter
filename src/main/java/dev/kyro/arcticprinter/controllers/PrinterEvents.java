@@ -5,6 +5,8 @@ import dev.kyro.arcticprinter.ArcticPrinter;
 import dev.kyro.arcticprinter.enums.PrinterEndReason;
 import dev.kyro.arcticprinter.objects.PrinterPlayer;
 import net.brcdev.shopgui.ShopGuiPlusApi;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -19,8 +21,10 @@ public class PrinterEvents implements Listener {
     public static void onPlace(BlockPlaceEvent event) {
 
         Player player = event.getPlayer();
-        if(!PrinterManager.inPrinter(player)) return;
+        if(!PrinterManager.inPrinter(player) || event.getBlock() == null) return;
         PrinterPlayer printerPlayer = PrinterManager.getPrinterPlayer(player);
+        Block block = event.getBlock();
+        Material material = block.getType();
 
         double playerBalance = ArcticPrinter.VAULT.getBalance(player);
         double blockCost = ShopGuiPlusApi.getItemStackPriceBuy(player, event.getItemInHand());
@@ -35,6 +39,12 @@ public class PrinterEvents implements Listener {
 
             AOutput.error(player, "Out of money");
             printerPlayer.exitPrinter(PrinterEndReason.OUT_OF_MONEY);
+            return;
+        }
+
+        if(ArcticPrinter.illegalItems.contains(material)) {
+
+            AOutput.error(player, "That item is not allowed");
             return;
         }
 

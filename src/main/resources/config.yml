@@ -14,5 +14,5 @@ messages:
 # disabling REDSTONE_WIRE would disable placing redstone
 #
 # https://helpch.at/docs/1.8/org/bukkit/Material.html
-illegal-items:
+illegal-materials:
   - BUCKET
