@@ -32,12 +32,14 @@ public class PrinterEvents implements Listener {
         if(blockCost < 0) {
 
             AOutput.error(player, "Block is not in config");
+            event.setCancelled(true);
             return;
         }
 
         if(playerBalance < blockCost) {
 
             AOutput.error(player, "Out of money");
+            event.setCancelled(true);
             printerPlayer.exitPrinter(PrinterEndReason.OUT_OF_MONEY);
             return;
         }
@@ -45,6 +47,7 @@ public class PrinterEvents implements Listener {
         if(ArcticPrinter.illegalItems.contains(material)) {
 
             AOutput.error(player, "That item is not allowed");
+            event.setCancelled(true);
             return;
         }
 
