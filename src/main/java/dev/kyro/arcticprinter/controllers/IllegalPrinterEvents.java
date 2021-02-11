@@ -25,9 +25,9 @@ public class IllegalPrinterEvents implements Listener {
 
         if(ArcticPrinter.illegalItems.contains(event.getCursor().getType())) {
 
-            AOutput.error(player, "That item is not allowed");
             player.setItemOnCursor(new ItemStack(Material.AIR));
             event.setCancelled(true);
+            AOutput.error(player, "That item is not allowed");
         }
     }
 
@@ -35,10 +35,15 @@ public class IllegalPrinterEvents implements Listener {
     public static void onInteract(PlayerInteractEvent event) {
 
         Player player = event.getPlayer();
-        if(!PrinterManager.inPrinter(player)) return;
-        event.setCancelled(true);
+        if(!PrinterManager.inPrinter(player) || event.getItem() == null) return;
+        ItemStack itemStack = event.getItem();
 
-        AOutput.send(player, "cancelled interact event (probably not a good idea lol)");
+        if(ArcticPrinter.illegalItems.contains(itemStack.getType())) {
+
+            player.setItemInHand(new ItemStack(Material.AIR));
+            event.setCancelled(true);
+            AOutput.error(player, "That item is not allowed");
+        }
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
