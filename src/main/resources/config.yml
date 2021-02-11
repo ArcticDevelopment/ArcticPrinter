@@ -16,3 +16,4 @@ messages:
 # https://helpch.at/docs/1.8/org/bukkit/Material.html
 illegal-materials:
   - BUCKET
+  - MINECART

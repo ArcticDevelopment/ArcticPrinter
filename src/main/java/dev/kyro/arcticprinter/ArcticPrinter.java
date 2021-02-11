@@ -12,6 +12,7 @@ import org.bukkit.Material;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,7 +22,7 @@ public class ArcticPrinter extends JavaPlugin {
     public static Economy VAULT = null;
     public static FactionsPlugin FACTIONS;
 
-    public static List<Material> illegalItems;
+    public static List<Material> illegalItems = new ArrayList<>();
 
     private static final Logger log = Logger.getLogger("Minecraft");
 

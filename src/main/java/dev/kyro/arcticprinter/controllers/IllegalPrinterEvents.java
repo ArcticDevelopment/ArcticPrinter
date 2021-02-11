@@ -2,6 +2,7 @@ package dev.kyro.arcticprinter.controllers;
 
 import dev.kyro.arcticapi.misc.AOutput;
 import dev.kyro.arcticprinter.ArcticPrinter;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -11,6 +12,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class IllegalPrinterEvents implements Listener {
 
@@ -19,11 +21,12 @@ public class IllegalPrinterEvents implements Listener {
 
         Player player = (Player) event.getWhoClicked();
 
-        if(!PrinterManager.inPrinter(player)) return;
+        if(!PrinterManager.inPrinter(player) || event.getCursor() == null) return;
 
-        if(ArcticPrinter.illegalItems.contains(event.getCurrentItem().getType())) {
+        if(ArcticPrinter.illegalItems.contains(event.getCursor().getType())) {
 
-            AOutput.error(player, "You are not allowed to do that in printer mode");
+            AOutput.error(player, "That item is not allowed");
+            player.setItemOnCursor(new ItemStack(Material.AIR));
             event.setCancelled(true);
         }
     }
