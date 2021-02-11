@@ -8,7 +8,9 @@ import dev.kyro.arcticprinter.controllers.PrinterManager;
 import dev.kyro.arcticprinter.enums.PrinterEndReason;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -44,7 +46,6 @@ public class PrinterPlayer {
     public void enterPrinter() {
 
         player.setGameMode(GameMode.CREATIVE);
-        player.getInventory().clear();
 
         AOutput.send(player, "Entered Printer");
     }
@@ -53,8 +54,16 @@ public class PrinterPlayer {
 
         PrinterManager.printerPlayers.remove(player.getUniqueId());
 
-        player.setGameMode(GameMode.SURVIVAL);
         player.getInventory().clear();
+        ItemStack[] armor = new ItemStack[4];
+        armor[0] = new ItemStack(Material.AIR);
+        armor[1] = new ItemStack(Material.AIR);
+        armor[2] = new ItemStack(Material.AIR);
+        armor[3] = new ItemStack(Material.AIR);
+        player.getInventory().setArmorContents(armor);
+
+
+        player.setGameMode(GameMode.SURVIVAL);
 
         if(endReason != null) AOutput.send(player, endReason.getMessage());
     }
