@@ -22,3 +22,8 @@ dependencies {
 
     compile 'com.github.ArcticDevelopment:ArcticAPI:1.4.1'
 }
+
+shadowJar {
+
+    relocate 'dev.kyro.arcticapi', 'dev.kyro.arcticprinter.arcticapi'
+}
