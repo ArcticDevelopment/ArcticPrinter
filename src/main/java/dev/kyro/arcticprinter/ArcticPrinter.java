@@ -24,11 +24,10 @@ public class ArcticPrinter extends JavaPlugin {
 
     public static List<Material> illegalItems = new ArrayList<>();
 
-    private static final Logger log = Logger.getLogger("Minecraft");
-
     @Override
     public void onEnable() {
 
+        Logger LOGGER = getLogger();
         INSTANCE = this;
 
         loadConfig();
@@ -36,7 +35,7 @@ public class ArcticPrinter extends JavaPlugin {
         ArcticAPI.configInit(this, "prefix", "error-prefix");
 
         if (!setupEconomy()) {
-            log.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+            LOGGER.severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
