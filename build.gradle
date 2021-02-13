@@ -25,7 +25,7 @@ repositories {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT'
     compileOnly 'com.github.SaberLLC:Saber-Factions:2.4.0-RC'
-    compileOnly 'com.github.brcdev-minecraft:shopgui-api:2.1.1'
+    compileOnly 'com.github.brcdev-minecraft:shopgui-api:2.1.1' exclude group: 'org.spigotmc'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7'
 
     compile 'com.github.ArcticDevelopment:ArcticAPI:1.4.1'
