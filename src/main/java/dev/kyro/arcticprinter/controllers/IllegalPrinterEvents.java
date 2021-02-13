@@ -5,20 +5,19 @@ import dev.kyro.arcticprinter.ArcticPrinter;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class IllegalPrinterEvents implements Listener {
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true)
     public static void onInventoryClick(InventoryClickEvent event) {
 
         Player player = (Player) event.getWhoClicked();
@@ -33,7 +32,7 @@ public class IllegalPrinterEvents implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true)
     public static void onInteract(PlayerInteractEvent event) {
 
         Player player = event.getPlayer();
@@ -48,15 +47,17 @@ public class IllegalPrinterEvents implements Listener {
         }
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
-    public static void onEntityInteract(PlayerInteractAtEntityEvent event) {
+    @EventHandler(ignoreCancelled = true)
+    public static void onEntityInteract(PlayerInteractEntityEvent event) {
 
         Player player = event.getPlayer();
         if(!PrinterManager.inPrinter(player)) return;
         event.setCancelled(true);
+
+        AOutput.error(player, "You are not allowed to interact with entities while in printer");
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true)
     public static void onItemPickup(PlayerPickupItemEvent event) {
 
         Player player = event.getPlayer();
@@ -64,28 +65,31 @@ public class IllegalPrinterEvents implements Listener {
         event.setCancelled(true);
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true)
     public static void onItemDrop(PlayerDropItemEvent event) {
 
         Player player = event.getPlayer();
         if(!PrinterManager.inPrinter(player)) return;
         event.setCancelled(true);
+        AOutput.error(player, "You are not allowed to drop items while in printer");
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true)
     public static void onAttack(EntityDamageByEntityEvent event) {
 
         if(!(event.getDamager() instanceof Player)) return;
         Player player = (Player) event.getDamager();
         if(!PrinterManager.inPrinter(player)) return;
         event.setCancelled(true);
+        AOutput.error(player, "That item is not allowed");
     }
 
-    @EventHandler(ignoreCancelled = true, priority = EventPriority.LOW)
+    @EventHandler(ignoreCancelled = true)
     public static void inventoryOpen(InventoryOpenEvent event) {
 
         Player player = (Player) event.getPlayer();
         if(!PrinterManager.inPrinter(player)) return;
         event.setCancelled(true);
+        AOutput.error(player, "You are not allowed to open inventories while in printer");
     }
 }

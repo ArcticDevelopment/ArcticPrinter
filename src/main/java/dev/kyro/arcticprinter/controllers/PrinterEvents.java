@@ -56,7 +56,7 @@ public class PrinterEvents implements Listener {
         printerPlayer.placeBlock(block);
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public static void onBreak(BlockBreakEvent event) {
 
         Player player = event.getPlayer();
@@ -74,7 +74,7 @@ public class PrinterEvents implements Listener {
         AOutput.error(player, "You can only place blocks placed recently in printer mode");
     }
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public static void onMove(PlayerMoveEvent event) {
 
         Player player = event.getPlayer();
