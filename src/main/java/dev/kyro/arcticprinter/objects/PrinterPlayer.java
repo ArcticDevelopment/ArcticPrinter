@@ -9,6 +9,7 @@ import dev.kyro.arcticprinter.enums.PrinterEndReason;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -39,6 +40,7 @@ public class PrinterPlayer {
 
                 AOutput.send(player, "Enemy nearby. Disabling printer");
                 exitPrinter(PrinterEndReason.ENEMY_NEARBY);
+                cancel();
             }
         }.runTaskTimer(ArcticPrinter.INSTANCE, 0L, 20L);
     }
@@ -81,5 +83,12 @@ public class PrinterPlayer {
     public void withdraw(double amount) {
 
         ArcticPrinter.VAULT.withdrawPlayer(player, amount);
+    }
+
+    public void placeBlock(Block block) {
+
+        recentBlocks.add(block.getLocation());
+
+        if(recentBlocks.size() > 5) recentBlocks.remove(0);
     }
 }

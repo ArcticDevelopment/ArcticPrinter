@@ -1,5 +1,6 @@
 package dev.kyro.arcticprinter.commands;
 
+import com.massivecraft.factions.FPlayer;
 import com.massivecraft.factions.FPlayers;
 import dev.kyro.arcticapi.misc.AOutput;
 import dev.kyro.arcticprinter.controllers.PrinterManager;
@@ -25,6 +26,7 @@ public class PrinterCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        FPlayer fPlayer = FPlayers.getInstance().getByPlayer(player);
 
         if(PrinterManager.inPrinter(player)) {
 
@@ -53,6 +55,12 @@ public class PrinterCommand implements CommandExecutor {
                     AOutput.error(player, "Please take off your armor");
                     return false;
                 }
+            }
+
+            if(fPlayer.hasEnemiesNearby()) {
+
+                AOutput.send(player, "Enemy nearby. You cannot enable printer");
+                return false;
             }
 
             new PrinterPlayer(player);

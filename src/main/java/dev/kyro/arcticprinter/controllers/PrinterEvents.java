@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -52,6 +53,25 @@ public class PrinterEvents implements Listener {
         }
 
         ArcticPrinter.VAULT.withdrawPlayer(player, blockCost);
+        printerPlayer.placeBlock(block);
+    }
+
+    @EventHandler
+    public static void onBreak(BlockBreakEvent event) {
+
+        Player player = event.getPlayer();
+        if(!PrinterManager.inPrinter(player) || event.getBlock() == null) return;
+        PrinterPlayer printerPlayer = PrinterManager.getPrinterPlayer(player);
+        Block block = event.getBlock();
+
+        if(printerPlayer.recentBlocks.contains(block.getLocation())) {
+
+            printerPlayer.recentBlocks.remove(block.getLocation());
+            return;
+        }
+
+        event.setCancelled(true);
+        AOutput.error(player, "You can only place blocks placed recently in printer mode");
     }
 
     @EventHandler
