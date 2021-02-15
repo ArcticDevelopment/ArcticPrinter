@@ -59,7 +59,6 @@ public class ArcticPrinter extends JavaPlugin {
         }
     }
 
-
     @Override
     public void onDisable() {
 
